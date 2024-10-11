@@ -115,3 +115,15 @@ GitHub: jSierraB3991
 Email: eliotandelon@gmail.com, judas3991@gmail.com
 
 No dudes en abrir un issue en el repositorio si encuentras algún problema o tienes alguna sugerencia de mejora.
+
+## Licencia
+
+Este proyecto está licenciado bajo los términos de la [Licencia Pública General GNU, versión 3 (GPLv3)](https://www.gnu.org/licenses/gpl-3.0.html).
+
+### Resumen de la licencia:
+
+- Puedes copiar, distribuir y modificar este proyecto siempre que mantengas la misma licencia.
+- Cualquier modificación realizada y distribuida debe estar bajo los mismos términos.
+- No hay garantías sobre el uso del software.
+
+Puedes encontrar una copia completa de la licencia en el archivo [LICENSE](./LICENSE) en el repositorio de este proyecto.
