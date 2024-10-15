@@ -98,7 +98,7 @@ func GetDateShortByNilString(date *string) (*time.Time, error) {
 	if date == nil {
 		return nil, nil
 	}
-	dateString, err := GetDateTimeByString(*date)
+	dateString, err := GetDateByString(*date)
 	return &dateString, err
 }
 
@@ -106,6 +106,6 @@ func GetDateLongByNilString(date *string) (*time.Time, error) {
 	if date == nil {
 		return nil, nil
 	}
-	dateString, err := GetDateByString(*date)
+	dateString, err := GetDateTimeByString(*date)
 	return &dateString, err
 }
