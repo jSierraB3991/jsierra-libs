@@ -46,6 +46,22 @@ func GetDateByString(date string) (time.Time, error) {
 	return parsedDate, nil
 }
 
+func GetStringByDateNilShort(date *time.Time) *string {
+	if date == nil {
+		return nil
+	}
+	dateString := GetStringToTimeShortFormat(*date)
+	return &dateString
+}
+
+func GetStringByDateNilLong(date *time.Time) *string {
+	if date == nil {
+		return nil
+	}
+	dateString := GetStringToTimeLongFormat(*date)
+	return &dateString
+}
+
 func GetStringToTimeShortFormat(date time.Time) string {
 	return GetStringNumberFor(date.Year()) + "/" + GetStringNumberFor(int(date.Month())) + "/" + GetStringNumberFor(date.Day())
 }
