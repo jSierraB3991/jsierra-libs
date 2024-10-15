@@ -32,7 +32,12 @@ func GetDateTimeByString(date string) (time.Time, error) {
 	layout := "2006-01-02 15:04:05"
 	parsedDate, err := time.Parse(layout, date)
 	if err != nil {
-		return time.Time{}, StringToDateParseError{}
+		layout = "2006/01/02 15:04:05"
+		parsedDate, err := time.Parse(layout, date)
+		if err != nil {
+			return time.Time{}, StringToDateParseError{}
+		}
+		return parsedDate, nil
 	}
 	return parsedDate, nil
 }
@@ -41,7 +46,12 @@ func GetDateByString(date string) (time.Time, error) {
 	layout := "2006-01-02"
 	parsedDate, err := time.Parse(layout, date)
 	if err != nil {
-		return time.Time{}, StringToDateParseError{}
+		layout := "2006/01/02"
+		parsedDate, err := time.Parse(layout, date)
+		if err != nil {
+			return time.Time{}, StringToDateParseError{}
+		}
+		return parsedDate, nil
 	}
 	return parsedDate, nil
 }
