@@ -13,6 +13,10 @@ func GetStringNumberFor(number int) string {
 	return response
 }
 
+func RemoveSpace(cadena string) string {
+	return strings.ReplaceAll(cadena, " ", "")
+}
+
 func GetStringUNumberFor(number uint) string {
 	return GetStringNumberFor(int(number))
 }
