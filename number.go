@@ -12,8 +12,19 @@ func GetNumberForString(number string) int {
 		log.Println("GetNumberForString")
 		return 0
 	}
-	return int(response)
+	return response
 }
+
+func GetUNumberForString(number string) uint {
+	response, err := strconv.Atoi(number)
+	if err != nil {
+		log.Println(number)
+		log.Println("GetNumberForString")
+		return 0
+	}
+	return uint(response)
+}
+
 func GetFloatStringToUInt(data uint) string {
 	// Convierte el flotante a una cadena
 	return strconv.FormatFloat(GetFloatToUInt(data), 'f', -1, 64)
