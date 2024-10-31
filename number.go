@@ -1,6 +1,7 @@
 package eliotlibs
 
 import (
+	"fmt"
 	"log"
 	"strconv"
 )
@@ -41,4 +42,25 @@ func GetFloatToUInt(data uint) float64 {
 
 func GetFloatToInt(data int) float64 {
 	return float64(data)
+}
+
+func GetStrinToFloat(numFloat float32) string {
+	return strconv.FormatFloat(float64(numFloat), 'f', 2, 32)
+}
+
+type InvalidConvertStringToFloat struct{}
+
+func (InvalidConvertStringToFloat) Error() string {
+	return "InvalidConvertStringToFloat"
+}
+
+func GetStringtofloat32(numString string) (float32, error) {
+	floatValue, err := strconv.ParseFloat(numString, 32)
+	if err != nil {
+		fmt.Println("Error converting string to float32:", err)
+		return float32(0), InvalidConvertStringToFloat{}
+	}
+
+	// Cast the float64 result to float32
+	return float32(floatValue), nil
 }
