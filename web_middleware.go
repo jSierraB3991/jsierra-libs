@@ -27,7 +27,7 @@ func PublicMiddleWare(route string, method string) bool {
 }
 
 func GetClaimByToken(tokenString, claim string) (interface{}, error) {
-	token, _, err := new(jwt.Parser).ParseUnverified(tokenString, jwt.MapClaims{})
+	token, _, err := new(jwt.Parser).ParseUnverified(removeBearerPrefix(tokenString), jwt.MapClaims{})
 	if err != nil {
 		fmt.Println("Error parsing token:", err)
 		return nil, err
@@ -38,6 +38,14 @@ func GetClaimByToken(tokenString, claim string) (interface{}, error) {
 		return claims[claim], nil
 	}
 	return nil, errors.New("INVALID_CLAIMS")
+}
+
+// Función para eliminar el prefijo "Bearer " del encabezado de autorización
+func removeBearerPrefix(authHeader string) string {
+	if strings.HasPrefix(authHeader, "Bearer ") {
+		return strings.TrimPrefix(authHeader, "Bearer ")
+	}
+	return authHeader
 }
 
 func GetHeaderMail(requet *http.Request) (string, error) {
