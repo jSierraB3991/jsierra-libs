@@ -45,7 +45,11 @@ func GetFloatToInt(data int) float64 {
 }
 
 func GetStrinToFloat(numFloat float32) string {
-	return strconv.FormatFloat(float64(numFloat), 'f', 2, 32)
+	return GetStrinToFloat64(float64(numFloat))
+}
+
+func GetStrinToFloat64(numFloat float64) string {
+	return strconv.FormatFloat(numFloat, 'f', 2, 32)
 }
 
 type InvalidConvertStringToFloat struct{}
