@@ -58,13 +58,20 @@ func (InvalidConvertStringToFloat) Error() string {
 	return "InvalidConvertStringToFloat"
 }
 
-func GetStringtofloat32(numString string) (float32, error) {
+func GetFloatToString(numString string) (float64, error) {
 	floatValue, err := strconv.ParseFloat(numString, 32)
 	if err != nil {
 		fmt.Println("Error converting string to float32:", err)
-		return float32(0), InvalidConvertStringToFloat{}
+		return 0, InvalidConvertStringToFloat{}
+	}
+	return floatValue, nil
+}
+
+func GetStringtofloat32(numString string) (float32, error) {
+	floatValue, err := GetFloatToString(numString)
+	if err != nil {
+		return 0, err
 	}
 
-	// Cast the float64 result to float32
 	return float32(floatValue), nil
 }
