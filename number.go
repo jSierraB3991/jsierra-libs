@@ -49,7 +49,7 @@ func GetStrinToFloat(numFloat float32) string {
 }
 
 func GetStrinToFloat64(numFloat float64) string {
-	return strconv.FormatFloat(numFloat, 'f', 3, 32)
+	return strconv.FormatFloat(numFloat, 'f', 2, 32)
 }
 
 type InvalidConvertStringToFloat struct{}
