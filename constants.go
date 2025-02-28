@@ -1,5 +1,7 @@
 package eliotlibs
 
 const (
-	HeaderAuthorization = "Authorization"
+	HeaderAuthorization        = "Authorization"
+	Lowercase           string = "abcdefghijklmnopqrstuvwxyz"
+	Uppercase           string = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 )
