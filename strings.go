@@ -59,3 +59,8 @@ func ContainsEmoji(s string) bool {
 	var emojiRegex = regexp.MustCompile(`[\p{So}\p{Cs}]`)
 	return emojiRegex.MatchString(s)
 }
+
+type ImageNameTemp struct {
+	UrlImageTemp string
+	ImageName    string
+}
