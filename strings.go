@@ -4,6 +4,7 @@ import (
 	"crypto/rand"
 	"errors"
 	"math/big"
+	"regexp"
 	"strconv"
 	"strings"
 )
@@ -52,4 +53,9 @@ func GenerateRandomCode(length int, charSet string) (string, error) {
 	}
 
 	return result.String(), nil
+}
+
+func containsEmoji(s string) bool {
+	var emojiRegex = regexp.MustCompile(`[\p{So}\p{Cs}]`)
+	return emojiRegex.MatchString(s)
 }
