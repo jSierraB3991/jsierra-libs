@@ -55,7 +55,7 @@ func GenerateRandomCode(length int, charSet string) (string, error) {
 	return result.String(), nil
 }
 
-func containsEmoji(s string) bool {
+func ContainsEmoji(s string) bool {
 	var emojiRegex = regexp.MustCompile(`[\p{So}\p{Cs}]`)
 	return emojiRegex.MatchString(s)
 }
