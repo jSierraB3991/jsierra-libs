@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"log"
 	"strconv"
+
+	"golang.org/x/text/message"
 )
 
 func GetNumberForString(number string) int {
@@ -74,4 +76,13 @@ func GetStringtofloat32(numString string) (float32, error) {
 	}
 
 	return float32(floatValue), nil
+}
+
+func GetFormatMoneyToFloat32(price float32) string {
+	return GetFormatMoneyToFloat(float64(price))
+}
+
+func GetFormatMoneyToFloat(price float64) string {
+	p := message.NewPrinter(message.MatchLanguage("en"))
+	return p.Sprintf("$%.2f", price)
 }

@@ -70,3 +70,34 @@ func TestConvertStringToFloat32(t *testing.T) {
 		})
 	}
 }
+
+func TestConvertFloat32ToFomatMoney(t *testing.T) {
+
+	testCases := []struct {
+		Value       float64
+		ExpectValue string
+		ExpectError error
+	}{
+		{
+			Value:       1123.45,
+			ExpectValue: "$1,123.45",
+			ExpectError: nil,
+		},
+		{
+			Value:       595.34,
+			ExpectValue: "$595.34",
+			ExpectError: nil,
+		},
+	}
+
+	for i := range testCases {
+		tc := testCases[i]
+
+		t.Run(tc.ExpectValue, func(t *testing.T) {
+			result := GetFormatMoneyToFloat(tc.Value)
+			if result != tc.ExpectValue {
+				t.Errorf("expect %v, got %v", tc.ExpectValue, result)
+			}
+		})
+	}
+}
