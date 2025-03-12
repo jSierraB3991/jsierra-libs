@@ -7,6 +7,9 @@ import (
 	"regexp"
 	"strconv"
 	"strings"
+
+	"golang.org/x/text/cases"
+	"golang.org/x/text/language"
 )
 
 func GetStringNumberFor(number int) string {
@@ -58,6 +61,13 @@ func GenerateRandomCode(length int, charSet string) (string, error) {
 func ContainsEmoji(s string) bool {
 	var emojiRegex = regexp.MustCompile(`[\p{So}\p{Cs}]`)
 	return emojiRegex.MatchString(s)
+}
+
+// Capitalizar nombre correctamente antes de guardarlo en la DB
+func CapitalizeName(name string) string {
+	name = strings.TrimSpace(name)         // Elimina espacios en blanco extra
+	caser := cases.Title(language.English) // Capitaliza adecuadamente
+	return caser.String(name)
 }
 
 type ImageNameTemp struct {
