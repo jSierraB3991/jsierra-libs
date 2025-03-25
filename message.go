@@ -10,7 +10,11 @@ import (
 )
 
 func GetMessageParam(code string, accept string, name string) string {
+	params := map[string]interface{}{"Name": name}
+	return GetMessageMultipleParamParam(code, accept, params)
+}
 
+func GetMessageMultipleParamParam(code string, accept string, params map[string]interface{}) string {
 	//TODO challenge english by default
 	bundle := i18n.NewBundle(language.Spanish)
 	bundle.RegisterUnmarshalFunc("json", json.Unmarshal)
@@ -22,7 +26,7 @@ func GetMessageParam(code string, accept string, name string) string {
 	}
 
 	localizer := i18n.NewLocalizer(bundle, accept)
-	result, err := localizer.Localize(&i18n.LocalizeConfig{MessageID: code, TemplateData: map[string]interface{}{"Name": name}})
+	result, err := localizer.Localize(&i18n.LocalizeConfig{MessageID: code, TemplateData: params})
 	if err != nil {
 		log.Println(err)
 		return code
