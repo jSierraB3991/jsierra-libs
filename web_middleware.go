@@ -1,13 +1,8 @@
 package eliotlibs
 
 import (
-	"errors"
-	"fmt"
-	"net/http"
 	"strings"
 	"unicode"
-
-	"github.com/golang-jwt/jwt"
 )
 
 func PublicMiddleWare(route string, method string) bool {
@@ -26,40 +21,11 @@ func PublicMiddleWare(route string, method string) bool {
 	return false
 }
 
-func GetClaimByToken(tokenString, claim string) (interface{}, error) {
-	token, _, err := new(jwt.Parser).ParseUnverified(removeBearerPrefix(tokenString), jwt.MapClaims{})
-	if err != nil {
-		fmt.Println("Error parsing token:", err)
-		return nil, err
-	}
-
-	// Access the claims
-	if claims, ok := token.Claims.(jwt.MapClaims); ok {
-		return claims[claim], nil
-	}
-	return nil, errors.New("INVALID_CLAIMS")
-}
-
-// Función para eliminar el prefijo "Bearer " del encabezado de autorización
-func removeBearerPrefix(authHeader string) string {
-	if strings.HasPrefix(authHeader, "Bearer ") {
-		return strings.TrimPrefix(authHeader, "Bearer ")
+func RemovePrefixInString(authHeader, prefix string) string {
+	if strings.HasPrefix(authHeader, prefix) {
+		return strings.TrimPrefix(authHeader, prefix)
 	}
 	return authHeader
-}
-
-func GetHeaderMail(requet *http.Request) (string, error) {
-	var email string
-	emailInterface, err := GetClaimByToken(requet.Header[HeaderAuthorization][0], "email")
-	if err != nil {
-		return "", err
-	}
-
-	if emailInterface != nil {
-		return emailInterface.(string), nil
-	}
-
-	return email, nil
 }
 
 func isNumber(s string) bool {
