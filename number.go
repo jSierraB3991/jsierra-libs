@@ -33,9 +33,13 @@ func GetFloatStringToUInt(data uint) string {
 	return strconv.FormatFloat(GetFloatToUInt(data), 'f', -1, 64)
 }
 
-func GetFloatStringToInt(data int) string {
+func GetStringToInt(data int) string {
 	// Convierte el flotante a una cadena
 	return strconv.FormatFloat(GetFloatToInt(data), 'f', -1, 64)
+}
+
+func GetStringToInt64(number int64) string {
+	return strconv.Itoa(int(number))
 }
 
 func GetFloatToUInt(data uint) float64 {
