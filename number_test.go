@@ -101,3 +101,43 @@ func TestConvertFloat32ToFomatMoney(t *testing.T) {
 		})
 	}
 }
+
+func TestFillZeros(t *testing.T) {
+	testCases := []struct {
+		Digits      int
+		Number      int
+		ExpectValue string
+	}{
+		{
+			Digits:      2,
+			Number:      1,
+			ExpectValue: "01",
+		},
+		{
+			Digits:      10,
+			Number:      1,
+			ExpectValue: "0000000001",
+		},
+		{
+			Digits:      2,
+			Number:      10,
+			ExpectValue: "10",
+		},
+		{
+			Digits:      2,
+			Number:      100,
+			ExpectValue: "100",
+		},
+	}
+
+	for i := range testCases {
+		tc := testCases[i]
+
+		t.Run(tc.ExpectValue, func(t *testing.T) {
+			result := FillZeros(tc.Digits, tc.Number)
+			if result != tc.ExpectValue {
+				t.Errorf("expect %v, got %v", tc.ExpectValue, result)
+			}
+		})
+	}
+}

@@ -90,3 +90,7 @@ func GetFormatMoneyToFloat(price float64) string {
 	p := message.NewPrinter(message.MatchLanguage("en"))
 	return p.Sprintf("$%.2f", price)
 }
+
+func FillZeros(digits int, number int) string {
+	return fmt.Sprintf("%0*d", digits, number)
+}
