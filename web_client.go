@@ -6,6 +6,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"mime/multipart"
 	"net/http"
 )
 
@@ -84,5 +85,71 @@ func Post(urlBase, uri string, jsonData []byte, result interface{}, headers []He
 		// Imprimir el cuerpo de la respuesta
 		fmt.Println("Respuesta:", string(body))
 	}
+	return errors.New(resp.Status)
+}
+
+func PostFile(urlBase, uri string, fileHeader *multipart.FileHeader, result interface{}, headers []HeaderRequest) error {
+	// Open the file
+	file, err := fileHeader.Open()
+	if err != nil {
+		return err
+	}
+	defer file.Close()
+
+	// Create a buffer to hold the multipart form data
+	body := &bytes.Buffer{}
+	writer := multipart.NewWriter(body)
+
+	// Create a form file field and copy the file content into it
+	part, err := writer.CreateFormFile("file", fileHeader.Filename)
+	if err != nil {
+		return err
+	}
+	_, err = io.Copy(part, file)
+	if err != nil {
+		return err
+	}
+
+	// Close the writer to finalize the multipart form data
+	err = writer.Close()
+	if err != nil {
+		return err
+	}
+
+	// Create the POST request
+	req, err := http.NewRequest("POST", urlBase+uri, body)
+	if err != nil {
+		return err
+	}
+
+	// Set headers
+	req.Header.Set("Content-Type", writer.FormDataContentType())
+	for _, v := range headers {
+		req.Header.Add(v.Key, v.Value)
+	}
+
+	// Send the request
+	client := &http.Client{}
+	resp, err := client.Do(req)
+	if err != nil {
+		return err
+	}
+	defer resp.Body.Close()
+
+	// Handle the response
+	if resp.StatusCode == 200 || resp.StatusCode == 201 {
+		err = json.NewDecoder(resp.Body).Decode(&result)
+		if err != nil {
+			return err
+		}
+		return nil
+	}
+
+	bodyResp, err := io.ReadAll(resp.Body)
+	if err != nil {
+		fmt.Println("Error reading response:", err)
+		return err
+	}
+	fmt.Println("Response:", string(bodyResp))
 	return errors.New(resp.Status)
 }
