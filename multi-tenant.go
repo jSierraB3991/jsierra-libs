@@ -11,6 +11,7 @@ type contextKey string
 
 const (
 	ContextTenantKey contextKey = "tenant_id"
+	HEADER_TENAT_ID  string     = "X-Tenant-ID"
 )
 
 func FromContext(ctx context.Context) (string, bool) {
@@ -19,7 +20,7 @@ func FromContext(ctx context.Context) (string, bool) {
 }
 
 func QuoteIdentifier(identifier string) string {
-	return `"` + strings.ReplaceAll(identifier, `"`, `""`) + `"`
+	return `` + strings.ReplaceAll(identifier, `"`, `""`) + ``
 }
 
 func WithTenant(ctx context.Context) (*string, error) {
