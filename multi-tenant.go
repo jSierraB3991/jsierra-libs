@@ -20,7 +20,7 @@ func FromContext(ctx context.Context) (string, bool) {
 }
 
 func QuoteIdentifier(identifier string) string {
-	return `` + strings.ReplaceAll(identifier, `"`, `""`) + ``
+	return `"` + strings.ReplaceAll(identifier, `"`, `""`) + `"`
 }
 
 func WithTenant(ctx context.Context) (*string, error) {

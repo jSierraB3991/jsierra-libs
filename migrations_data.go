@@ -1,7 +1,11 @@
 package eliotlibs
 
 import (
+	"fmt"
 	"log"
+	"reflect"
+	"runtime"
+	"strings"
 )
 
 type MigrationInterface interface {
@@ -28,12 +32,34 @@ func RunMigrate(mInterface MigrationInterface, version string, migration func() 
 }
 
 func RunMigrations(mInterface MigrationInterface, migrations ...func() error) error {
-	for i, migration := range migrations {
-		version := FillZeros(2, i+1)
-		err := RunMigrate(mInterface, version, migration)
+	for _, migration := range migrations {
+		version, err := GetNameOfFunction(migration)
+		if err != nil {
+			return err
+		}
+
+		err = RunMigrate(mInterface, version, migration)
 		if err != nil {
 			return err
 		}
 	}
 	return nil
+}
+
+func GetNameOfFunction(fn func() error) (string, error) {
+	ptr := reflect.ValueOf(fn).Pointer()
+	funcInfo := runtime.FuncForPC(ptr)
+	var version string
+	if funcInfo == nil {
+		return "", fmt.Errorf("no se pudo obtener información de la función")
+	}
+	fullName := funcInfo.Name()
+
+	lastDot := strings.LastIndex(fullName, ".")
+	if lastDot != -1 {
+		version = fullName[lastDot+1:]
+	} else {
+		version = fullName
+	}
+	return version, nil
 }
