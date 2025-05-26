@@ -1,8 +1,8 @@
 package eliotlibs
 
-func RunValidations(validations ...func() error) error {
+func RunValidations(req interface{}, validations ...func(req interface{}) error) error {
 	for _, validation := range validations {
-		err := validation()
+		err := validation(req)
 		if err != nil {
 			return err
 		}
