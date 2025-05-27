@@ -7,6 +7,7 @@ import (
 	"regexp"
 	"strconv"
 	"strings"
+	"unicode"
 
 	"golang.org/x/text/cases"
 	"golang.org/x/text/language"
@@ -56,6 +57,20 @@ func GenerateRandomCode(length int, charSet string) (string, error) {
 	}
 
 	return result.String(), nil
+}
+
+func GenerateCodeByParams(params ...string) string {
+	if params == nil {
+		return Uppercase
+	}
+	code, _ := GenerateRandomCode(20, Uppercase)
+	var initials strings.Builder
+	for _, v := range params {
+		if len(v) > 0 {
+			initials.WriteRune(unicode.ToUpper(rune(v[0])))
+		}
+	}
+	return strings.ToUpper(initials.String() + code)
 }
 
 func ContainsEmoji(s string) bool {
