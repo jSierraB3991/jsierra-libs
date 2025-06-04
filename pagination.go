@@ -1,5 +1,7 @@
 package eliotlibs
 
+import "strings"
+
 type Paggination struct {
 	Limit      int         `json:"limit"`
 	Page       int         `json:"page"`
@@ -42,4 +44,23 @@ type PagginationParam struct {
 type PreloadParams struct {
 	Preload          string
 	PagginationParam PagginationParam
+}
+
+func PaginationReqToModel(page, limit int, datForWhere interface{}, sort, propSort string) Paggination {
+	return Paggination{
+		Limit: limit,
+		Page:  page,
+		Data:  datForWhere,
+		Sort: func(sort, propSort string) string {
+			if strings.ToLower(sort) != "asc" && strings.ToLower(sort) != "desc" {
+				sort = "desc"
+			}
+
+			if propSort == "" {
+				propSort = "id"
+			}
+
+			return propSort + " " + sort
+		}(sort, propSort),
+	}
 }
