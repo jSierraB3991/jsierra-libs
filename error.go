@@ -5,3 +5,5 @@ func FinsihApp(err error) {
 		panic(err)
 	}
 }
+
+type ErrorWithParam error
