@@ -36,7 +36,7 @@ func (p *Paggination) GetSort() string {
 
 type PagginationParam struct {
 	Where string
-	Data  []interface{}
+	Data  interface{}
 }
 
 type PreloadParams struct {
