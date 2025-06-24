@@ -1,12 +1,12 @@
 package eliotlibs
 
 type Paggination struct {
-	Limit      int         `json:"limit"`
-	Page       int         `json:"page"`
-	TotalRows  int64       `json:"rows"`
-	TotalPages int         `json:"pages"`
-	Data       interface{} `json:"data"`
-	Sort       string      `json:"-"`
+	Limit      int           `json:"limit"`
+	Page       int           `json:"page"`
+	TotalRows  int64         `json:"rows"`
+	TotalPages int           `json:"pages"`
+	Data       []interface{} `json:"data"`
+	Sort       string        `json:"-"`
 }
 
 func (p *Paggination) GetOffset() int {
@@ -48,7 +48,7 @@ func PaginationReqToModel(req PaginationRequest, datForWhere interface{}) Paggin
 	return Paggination{
 		Limit: req.Limit,
 		Page:  req.Page,
-		Data:  datForWhere,
+		Data:  []interface{}{datForWhere},
 		Sort:  req.GetSort(),
 	}
 }
@@ -57,7 +57,7 @@ func CrudPaginationReqToModel(req CrudPaginationRequest) Paggination {
 	return Paggination{
 		Limit: req.Limit,
 		Page:  req.Page,
-		Data:  req.ParamName,
+		Data:  []interface{}{req.ParamName},
 		Sort:  req.GetSort(),
 	}
 }
