@@ -77,3 +77,17 @@ func getDataTime(datTime int) string {
 	}
 	return GetStringNumberFor(datTime)
 }
+
+func NextBusinessDay(start time.Time, days int) time.Time {
+	current := start
+	addedDays := 0
+
+	for addedDays < days {
+		current = current.AddDate(0, 0, 1) // Añade 1 día
+		if current.Weekday() != time.Saturday && current.Weekday() != time.Sunday {
+			addedDays++
+		}
+	}
+
+	return current
+}
