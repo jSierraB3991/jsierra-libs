@@ -17,12 +17,11 @@ func getContext(req *http.Request, tenantId string) context.Context {
 	return context.WithValue(req.Context(), ContextTenantKey, tenantId)
 }
 
-func GetContextWithTenantForMultenant(req *http.Request, schemasAllow []string) context.Context {
-	tenantID := req.Header.Get("X-Tenant-ID")
+func GetContextWithTenantForMultenant(req *http.Request, schemasAllow []string, tenantId string) context.Context {
 
 	for _, v := range schemasAllow {
-		if v == tenantID {
-			return getContext(req, tenantID)
+		if v == tenantId {
+			return getContext(req, tenantId)
 		}
 	}
 	return nil
