@@ -1,5 +1,17 @@
 package eliotlibs
 
+import "strconv"
+
+func EnsureBetaTesterAttribute(attrs *map[string][]string, key string, isBetaTester bool) {
+	strVal := strconv.FormatBool(isBetaTester)
+
+	if values, ok := (*attrs)[key]; ok && len(values) > 0 && values[0] == strVal {
+		return
+	}
+
+	(*attrs)[key] = []string{strVal}
+}
+
 func AddUniqueNumber(slice []int, num int) []int {
 	for _, v := range slice {
 		if v == num {
