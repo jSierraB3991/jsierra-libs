@@ -7,7 +7,7 @@ import (
 	"io"
 )
 
-func EncryptJson(key []byte, plaintext []byte) ([]byte, error) {
+func EncryptByteArray(key []byte, plaintext []byte) ([]byte, error) {
 	block, err := aes.NewCipher(key)
 	if err != nil {
 		return nil, err
@@ -27,7 +27,7 @@ func EncryptJson(key []byte, plaintext []byte) ([]byte, error) {
 	return ciphertext, nil
 }
 
-func DecryptJson(key []byte, ciphertext []byte) ([]byte, error) {
+func DecryptByteArray(key []byte, ciphertext []byte) ([]byte, error) {
 	block, err := aes.NewCipher(key)
 	if err != nil {
 		return nil, err
