@@ -7,11 +7,11 @@ import (
 
 func PublicMiddleWare(route string, method string) bool {
 
-	var NO_AUTH_NEED = []string{"public"}
-
-	if method == "OPTIONS" {
+	if (route == "/" && method == "GET") || method == "OPTIONS" {
 		return true
 	}
+
+	var NO_AUTH_NEED = []string{"public"}
 
 	for _, value := range NO_AUTH_NEED {
 		if strings.Contains(route, value) {
