@@ -13,37 +13,28 @@ type MigrationInterface interface {
 	ValidateMigrate(version string) (bool, error)
 }
 
-func RunMigrate(mInterface MigrationInterface, version string, migration func() error) error {
+func RunMigrate(mInterface MigrationInterface, version string, migration func() error) {
 	exist, err := mInterface.ValidateMigrate(version)
-	if err != nil {
-		return err
-	}
+	FinsihApp(err)
 
 	if exist {
-		return err
+		return
 	}
 
 	err = migration()
-	if err != nil {
-		log.Fatal(err)
-	}
+	FinsihApp(err)
 	log.Printf("SAVING MIGRATION %s", version)
-	return mInterface.SaveMigration(version)
+	err = mInterface.SaveMigration(version)
+	FinsihApp(err)
 }
 
-func RunMigrations(mInterface MigrationInterface, migrations ...func() error) error {
+func RunMigrations(mInterface MigrationInterface, migrations ...func() error) {
 	for _, migration := range migrations {
 		version, err := GetNameOfFunction(migration)
-		if err != nil {
-			return err
-		}
+		FinsihApp(err)
 
-		err = RunMigrate(mInterface, version, migration)
-		if err != nil {
-			return err
-		}
+		RunMigrate(mInterface, version, migration)
 	}
-	return nil
 }
 
 func GetNameOfFunction(fn func() error) (string, error) {
