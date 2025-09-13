@@ -94,3 +94,11 @@ func GetFormatMoneyToFloat(price float64) string {
 func FillZeros(digits int, number int) string {
 	return fmt.Sprintf("%0*d", digits, number)
 }
+
+func ConvertIntToUint(number int) uint {
+	result := uint(0)
+	if number > 0 {
+		result = uint(number)
+	}
+	return result
+}
