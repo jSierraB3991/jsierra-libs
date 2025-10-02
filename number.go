@@ -3,6 +3,7 @@ package eliotlibs
 import (
 	"fmt"
 	"log"
+	"math"
 	"strconv"
 
 	"golang.org/x/text/message"
@@ -101,4 +102,13 @@ func ConvertIntToUint(number int) uint {
 		result = uint(number)
 	}
 	return result
+}
+
+func GetInt64ToUint(number uint) int64 {
+	if number > math.MaxInt64 {
+		log.Printf("value %v too large for int64", number)
+		return 0
+	}
+	return int64(number)
+
 }
