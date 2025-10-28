@@ -10,6 +10,9 @@ import (
 )
 
 func GetNumberForString(number string) int {
+	if RemoveSpace(number) == "" {
+		return 0
+	}
 	response, err := strconv.Atoi(number)
 	if err != nil {
 		log.Println(number)
@@ -20,6 +23,9 @@ func GetNumberForString(number string) int {
 }
 
 func GetUNumberForString(number string) uint {
+	if RemoveSpace(number) == "" {
+		return 0
+	}
 	response, err := strconv.Atoi(number)
 	if err != nil {
 		log.Println(number)
