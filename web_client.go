@@ -37,7 +37,8 @@ func Get(urlBase, uri string, result interface{}, headers []HeaderRequest) error
 	defer resp.Body.Close()
 
 	if resp.StatusCode == 200 || resp.StatusCode == 201 {
-		err = json.NewDecoder(resp.Body).Decode(&result)
+		decoder := json.NewDecoder(resp.Body)
+		err = decoder.Decode(&result)
 		if err != nil {
 			return err
 		}
@@ -70,7 +71,8 @@ func Post(urlBase, uri string, jsonData []byte, result interface{}, headers []He
 	defer resp.Body.Close()
 
 	if resp.StatusCode == 200 || resp.StatusCode == 201 {
-		err = json.NewDecoder(resp.Body).Decode(&result)
+		decoder := json.NewDecoder(resp.Body)
+		err = decoder.Decode(&result)
 		if err != nil {
 			return err
 		}
@@ -138,7 +140,8 @@ func PostFile(urlBase, uri string, fileHeader *multipart.FileHeader, result inte
 
 	// Handle the response
 	if resp.StatusCode == 200 || resp.StatusCode == 201 {
-		err = json.NewDecoder(resp.Body).Decode(&result)
+		decoder := json.NewDecoder(resp.Body)
+		err = decoder.Decode(&result)
 		if err != nil {
 			return err
 		}
