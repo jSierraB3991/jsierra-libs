@@ -6,5 +6,5 @@ toolchain go1.24.6
 
 require (
 	github.com/nicksnyder/go-i18n/v2 v2.6.1
-	golang.org/x/text v0.33.0
+	golang.org/x/text v0.34.0
 )
