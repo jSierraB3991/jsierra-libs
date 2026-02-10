@@ -5,6 +5,7 @@ const (
 	Lowercase           string = "abcdefghijklmnopqrstuvwxyz"
 	Uppercase           string = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
-	COP = "COP"
-	USD = "USD"
+	COP    = "COP"
+	USD    = "USD"
+	PUBLIC = "public"
 )

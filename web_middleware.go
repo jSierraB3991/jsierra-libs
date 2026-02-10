@@ -11,7 +11,7 @@ func PublicMiddleWare(route string, method string) bool {
 		return true
 	}
 
-	var NO_AUTH_NEED = []string{"public"}
+	var NO_AUTH_NEED = []string{PUBLIC}
 
 	for _, value := range NO_AUTH_NEED {
 		if strings.Contains(route, value) {
