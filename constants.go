@@ -1,9 +1,9 @@
 package eliotlibs
 
 const (
-	HeaderAuthorization        = "Authorization"
-	Lowercase           string = "abcdefghijklmnopqrstuvwxyz"
-	Uppercase           string = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	HeaderAuthorization = "Authorization"
+	Lowercase           = "abcdefghijklmnopqrstuvwxyz"
+	Uppercase           = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 	COP    = "COP"
 	USD    = "USD"
@@ -11,5 +11,5 @@ const (
 
 	CONSTANT_XCACHE = "X-Cache"
 	CONSTANT_HIT    = "HIT"
-	CONTANT_MISS    = "MISS"
+	CONSTANT_MISS   = "MISS"
 )
