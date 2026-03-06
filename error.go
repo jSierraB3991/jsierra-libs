@@ -6,7 +6,7 @@ func FinsihApp(err error) {
 	}
 }
 
-type ErrorWithParam struct {
-	ErrorString string
-	Params      []string
+type ErrorWithParam interface {
+	Error() string
+	Params() []string
 }
