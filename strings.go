@@ -22,6 +22,11 @@ func RemoveSpace(cadena string) string {
 	return strings.ReplaceAll(cadena, " ", "")
 }
 
+func IsNumeric(s string) bool {
+	_, err := strconv.Atoi(s)
+	return err == nil
+}
+
 func GetStringUNumberFor(number uint) string {
 	return GetStringNumberFor(int(number))
 }
