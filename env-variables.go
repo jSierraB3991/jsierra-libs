@@ -23,3 +23,9 @@ func GetDataOfEnviromentRequired(enviromentVariable string) (string, error) {
 	}
 	return data, nil
 }
+
+func GetRequiredOrFinishApp(code string) string {
+	result, err := GetDataOfEnviromentRequired(code)
+	FinsihApp(err)
+	return result
+}
