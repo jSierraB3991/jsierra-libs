@@ -20,3 +20,7 @@ func ScheduleTask(targetTime time.Time, task func()) error {
 	time.AfterFunc(duration, task)
 	return nil
 }
+
+func GetNowColombia() time.Time {
+	return time.Now().UTC().Add(-5 * time.Hour)
+}
