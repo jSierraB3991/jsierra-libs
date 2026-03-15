@@ -59,7 +59,7 @@ func NewContainsEmojiError(data string) ContainsEmojiError {
 }
 
 func (ce ContainsEmojiError) Error() string {
-	return strings.ToUpper(ce.data) + "_CONTAINS_EMOJI_ERRO"
+	return strings.ToUpper(ce.data) + "_CONTAINS_EMOJI_ERROR"
 }
 
 func GenerateRandomCode(length int, charSet string) (string, error) {
