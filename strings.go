@@ -13,6 +13,13 @@ import (
 	"golang.org/x/text/language"
 )
 
+func ValidateIsHaveEmojis(cadenaNoEmoji, dataError string) error {
+
+	if ContainsEmoji(cadenaNoEmoji) {
+		return NewContainsEmojiError(dataError)
+	}
+	return nil
+}
 func GetStringNumberFor(number int) string {
 	response := strconv.Itoa(number)
 	return response
@@ -39,6 +46,20 @@ type StringToDateParseError struct{}
 
 func (StringToDateParseError) Error() string {
 	return "STRING_TO_DATE_PARSE_ERROR"
+}
+
+type ContainsEmojiError struct {
+	data string
+}
+
+func NewContainsEmojiError(data string) ContainsEmojiError {
+	return ContainsEmojiError{
+		data: data,
+	}
+}
+
+func (ce ContainsEmojiError) Error() string {
+	return strings.ToUpper(ce.data) + "_CONTAINS_EMOJI_ERRO"
 }
 
 func GenerateRandomCode(length int, charSet string) (string, error) {
