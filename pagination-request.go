@@ -28,30 +28,33 @@ func (p *PaginationRequest) GetSort() string {
 	return p.PropSort + " " + p.Sort
 }
 
-func GetPagginationRequestByOtherParam(getQueryParam func(string) string, propSotr, paramName string) CrudPaginationRequest {
+func GetPaginationRequestByOtherParam(getQueryParam func(string) string, propSotr, paramName string) CrudPaginationRequest {
 	return CrudPaginationRequest{
-		PaginationRequest: GetPagginationRequest(getQueryParam, propSotr),
+		PaginationRequest: GetPaginationRequest(getQueryParam, propSotr),
 		ParamName:         getQueryParam(paramName),
 	}
 }
 
-func GetPagginationRequest(getQueryParam func(string) string, propSotr string) PaginationRequest {
+func GetPaginationRequest(get func(string) string, propSotr string) PaginationRequest {
+	limit := GetNumberForString(get("limit"))
+	if limit <= 0 {
+		limit = 5
+	}
+
+	page := GetNumberForString(get("page"))
+	if page <= 0 {
+		page = 1
+	}
+
+	sort := get("sort")
+	if sort == "" {
+		sort = "created_at DESC" // default opcional
+	}
+
 	return PaginationRequest{
-		Limit: func() int {
-			limit := getQueryParam("limit")
-			if limit == "" {
-				return 5
-			}
-			return GetNumberForString(getQueryParam("limit"))
-		}(),
-		Sort: getQueryParam("sort"),
-		Page: func() int {
-			limit := getQueryParam("page")
-			if limit == "" {
-				return 1
-			}
-			return GetNumberForString(getQueryParam("page"))
-		}(),
+		Limit:    limit,
+		Page:     page,
+		Sort:     sort,
 		PropSort: propSotr,
 	}
 }
