@@ -115,3 +115,9 @@ type ImageNameTemp struct {
 	UrlImageTemp string
 	ImageName    string
 }
+
+func SanitizeLog(s string) string {
+	s = strings.ReplaceAll(s, "\n", "")
+	s = strings.ReplaceAll(s, "\r", "")
+	return s
+}
