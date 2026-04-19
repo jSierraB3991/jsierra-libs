@@ -45,7 +45,7 @@ func GetStringUNumber64For(number uint64) string {
 type StringToDateParseError struct{}
 
 func (StringToDateParseError) Error() string {
-	return "STRING_TO_DATE_PARSE_ERROR"
+	return STRING_TO_DATE_PARSE_ERROR
 }
 
 type ContainsEmojiError struct {

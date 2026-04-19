@@ -10,19 +10,19 @@ import (
 )
 
 func GetMessageParam(code string, accept string, name string) string {
-	params := map[string]interface{}{"Name": name}
+	params := map[string]any{"Name": name}
 	return GetMessageMultipleParamParam(code, accept, params)
 }
 
-func GetMessageMultipleParamParam(code string, accept string, params map[string]interface{}) string {
+func GetMessageMultipleParamParam(code string, accept string, params map[string]any) string {
 	//TODO challenge english by default
 	bundle := i18n.NewBundle(language.Spanish)
-	bundle.RegisterUnmarshalFunc("json", json.Unmarshal)
-	resurcePath := os.Getenv("RESOURCE_PATH")
-	if accept == "en" {
-		bundle.MustLoadMessageFile(resurcePath + "/en.json")
+	bundle.RegisterUnmarshalFunc(JSON, json.Unmarshal)
+	resurcePath := os.Getenv(RESOURCE_PATH)
+	if accept == ENGLISH {
+		bundle.MustLoadMessageFile(resurcePath + "/" + ENGLISH + ".json")
 	} else {
-		bundle.MustLoadMessageFile(resurcePath + "/es.json")
+		bundle.MustLoadMessageFile(resurcePath + "/" + SPANISH + ".json")
 	}
 
 	localizer := i18n.NewLocalizer(bundle, accept)
@@ -35,5 +35,5 @@ func GetMessageMultipleParamParam(code string, accept string, params map[string]
 }
 
 func GetMessage(code string) string {
-	return GetMessageParam(code, "es", "")
+	return GetMessageParam(code, SPANISH, "")
 }
