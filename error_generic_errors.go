@@ -3,13 +3,13 @@ package eliotlibs
 type MethodNotAllowedError struct {
 }
 
-func (e *MethodNotAllowedError) Error() string {
+func (MethodNotAllowedError) Error() string {
 	return "METHOD_NOT_ALLOWED"
 }
 
 type InvalidFormatError struct {
 }
 
-func (e *InvalidFormatError) Error() string {
+func (InvalidFormatError) Error() string {
 	return "INVALID_FORMAT"
 }
