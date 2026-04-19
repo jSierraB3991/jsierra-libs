@@ -6,7 +6,14 @@ func FinsihApp(err error) {
 	}
 }
 
-type ErrorWithParam interface {
-	Error() string
-	Params() []string
+type ErrorWithParams interface {
+	GetData() map[string]any
+}
+
+func GetParamsByError(err error) map[string]any {
+	he, ok := err.(ErrorWithParams)
+	if ok {
+		return he.GetData()
+	}
+	return nil
 }
