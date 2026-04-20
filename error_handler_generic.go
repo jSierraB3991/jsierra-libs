@@ -9,7 +9,7 @@ func validateWithError(mesasge string, codReturn int, err error) *int {
 	return nil
 }
 
-func runMultipleValidationCode(message string, valueReturn int, errs ...error) *int {
+func RunMultipleValidationCode(message string, valueReturn int, errs ...error) *int {
 	for _, err := range errs {
 		code := validateWithError(message, valueReturn, err)
 		if code != nil {
@@ -20,7 +20,7 @@ func runMultipleValidationCode(message string, valueReturn int, errs ...error) *
 }
 
 func GetErrorCodeMethodNotAllowed(message string) *int {
-	return runMultipleValidationCode(message, http.StatusMethodNotAllowed,
+	return RunMultipleValidationCode(message, http.StatusMethodNotAllowed,
 		MethodNotAllowedError{},
 	)
 }
