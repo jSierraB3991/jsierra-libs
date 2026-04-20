@@ -13,3 +13,9 @@ type InvalidFormatError struct {
 func (InvalidFormatError) Error() string {
 	return "INVALID_FORMAT"
 }
+
+type TenantNotFoundError struct{}
+
+func (TenantNotFoundError) Error() string {
+	return "TENANT_NOT_FOUND_ERROR"
+}
