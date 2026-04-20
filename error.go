@@ -17,3 +17,8 @@ func GetParamsByError(err error) map[string]any {
 	}
 	return nil
 }
+
+type ErrorResponse struct {
+	Code    string `json:"code" example:"UNAUTHORIZED_ERROR"`
+	Message string `json:"message" example:"Unauthorized"`
+}
