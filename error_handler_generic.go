@@ -26,7 +26,7 @@ func GetErrorCodeMethodNotAllowed(message string) *int {
 }
 
 func GetErrorCodeUnprocessableEntity(message string) *int {
-	return runMultipleValidationCode(message, http.StatusUnprocessableEntity,
+	return RunMultipleValidationCode(message, http.StatusUnprocessableEntity,
 		InvalidFormatError{},
 	)
 }
