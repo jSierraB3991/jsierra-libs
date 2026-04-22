@@ -1,6 +1,9 @@
 package eliotlibs
 
-import "net/http"
+import (
+	"errors"
+	"net/http"
+)
 
 func validateWithError(mesasge string, codReturn int, err error) *int {
 	if mesasge == err.Error() {
@@ -31,7 +34,10 @@ func GetErrorCodeUnprocessableEntity(message string) *int {
 	)
 }
 
-func RunValidationCodeSpecificErrors(message string, funcs ...func(string) *int) int {
+func RunValidationCodeSpecificErrors(message string, err error, funcs ...func(string) *int) int {
+	if errors.As(err, &BadRequestError{}) {
+		return http.StatusBadRequest
+	}
 	for _, fn := range funcs {
 		code := fn(message)
 		if code != nil {

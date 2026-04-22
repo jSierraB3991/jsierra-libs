@@ -18,4 +18,9 @@ const (
 	JSON                       = "json"
 	ENGLISH                    = "en"
 	SPANISH                    = "es"
+
+	INVALID_FORMAT_ERROR_LITERAL_CONST = "Invalid format error"
+	INVALID_FORMAT_ERROR_CONST         = "INVALID_FORMAT_ERROR"
+	METHOD_NOT_ALLOWED_LITERAL_CONST   = "Method Not Allowed"
+	METHOD_NOT_ALLOWED_CONST           = "METHOD_NOT_ALLOWED"
 )
