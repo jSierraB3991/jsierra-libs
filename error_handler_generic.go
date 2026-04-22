@@ -38,5 +38,5 @@ func RunValidationCodeSpecificErrors(message string, funcs ...func(string) *int)
 			return *code
 		}
 	}
-	return http.StatusBadRequest
+	return http.StatusInternalServerError
 }
