@@ -11,6 +11,7 @@ type ErrorWithParams interface {
 }
 
 func GetParamsByError(err error) map[string]any {
+	err = UnwrapRecursive(err)
 	he, ok := err.(ErrorWithParams)
 	if ok {
 		return he.GetData()
