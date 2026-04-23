@@ -30,10 +30,10 @@ func Int64P(data int64) *int64 {
 	return &data
 }
 
-func floatP(data float64) *float64 {
+func Float64P(data float64) *float64 {
 	return &data
 }
 
-func float32P(data float32) *float32 {
+func Float32P(data float32) *float32 {
 	return &data
 }

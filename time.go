@@ -4,12 +4,6 @@ import (
 	"time"
 )
 
-type InvalidDurationOfTask struct{}
-
-func (InvalidDurationOfTask) Error() string {
-	return "INVALID_DURATION_OF_TASK"
-}
-
 func ScheduleTask(targetTime time.Time, task func()) error {
 	duration := time.Until(targetTime)
 

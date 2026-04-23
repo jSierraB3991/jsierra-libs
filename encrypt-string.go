@@ -40,12 +40,6 @@ func Encrypt(secret, base64Key string) (string, error) {
 	return base64.StdEncoding.EncodeToString(ciphertext), nil
 }
 
-type InvalidEncryptData struct{}
-
-func (InvalidEncryptData) Error() string {
-	return "INVALID_ENCRYPT_DATA"
-}
-
 // Función para desencriptar un mensaje con AES-256-GCM
 func Decrypt(encryptedData, base64Key string) (string, error) {
 	// Decodificar la clave base64

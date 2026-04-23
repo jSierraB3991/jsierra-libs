@@ -2,7 +2,6 @@ package eliotlibs
 
 import (
 	"context"
-	"errors"
 	"regexp"
 	"strings"
 )
@@ -26,20 +25,29 @@ func QuoteIdentifier(identifier string) string {
 func WithTenant(ctx context.Context) (*string, error) {
 	tenant, isOk := FromContext(ctx)
 	if !isOk {
-		return nil, errors.New("tenant ID not found in context")
+		return nil, InvalidTenantDataError{}
 	}
+
+	err := ValidateTenant(tenant)
+	if err != nil {
+		return nil, err
+	}
+	// Quoteo seguro
+	quotedSchema := QuoteIdentifier(tenant)
+	return &quotedSchema, nil
+
+}
+
+func ValidateTenant(tenant string) error {
 	// Validar de tenant ID
 	if ok, _ := regexp.MatchString(`^[a-zA-Z0-9_]+$`, tenant); !ok {
-		return nil, errors.New("invalid characters in tenant")
+		return InvalidCharactersInTenantError{}
 	}
 
 	// Validación del nombre del schema
 	if !regexp.MustCompile(`^[a-zA-Z_][a-zA-Z0-9_]*$`).MatchString(tenant) {
-		return nil, errors.New("invalid characters in tenant")
+		return InvalidCharactersInTenantError{}
 	}
-
-	// Quoteo seguro
-	quotedSchema := QuoteIdentifier(tenant)
-	return &quotedSchema, nil
+	return nil
 
 }

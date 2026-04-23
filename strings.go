@@ -42,26 +42,6 @@ func GetStringUNumber64For(number uint64) string {
 	return GetStringNumberFor(int(number))
 }
 
-type StringToDateParseError struct{}
-
-func (StringToDateParseError) Error() string {
-	return STRING_TO_DATE_PARSE_ERROR
-}
-
-type ContainsEmojiError struct {
-	data string
-}
-
-func NewContainsEmojiError(data string) ContainsEmojiError {
-	return ContainsEmojiError{
-		data: data,
-	}
-}
-
-func (ce ContainsEmojiError) Error() string {
-	return strings.ToUpper(ce.data) + "_CONTAINS_EMOJI_ERROR"
-}
-
 func GenerateRandomCode(length int, charSet string) (string, error) {
 	if length <= 0 {
 		return "", errors.New("length must be greater than 0")

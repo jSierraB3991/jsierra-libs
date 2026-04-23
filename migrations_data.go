@@ -1,7 +1,6 @@
 package eliotlibs
 
 import (
-	"fmt"
 	"log"
 	"reflect"
 	"runtime"
@@ -42,7 +41,7 @@ func GetNameOfFunction(fn func() error) (string, error) {
 	funcInfo := runtime.FuncForPC(ptr)
 	var version string
 	if funcInfo == nil {
-		return "", fmt.Errorf("no se pudo obtener información de la función")
+		return "", InvalidFunctionMigrationError{}
 	}
 	fullName := funcInfo.Name()
 

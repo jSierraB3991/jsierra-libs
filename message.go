@@ -13,6 +13,7 @@ func GetMessageParam(code string, accept string, name string) string {
 	params := map[string]any{"Name": name}
 	return GetMessageMultipleParamParam(code, accept, params)
 }
+
 func GetMessageAccept(code string, accept string) string {
 	return GetMessageMultipleParamParam(code, accept, map[string]any{})
 }
@@ -35,8 +36,4 @@ func GetMessageMultipleParamParam(code string, accept string, params map[string]
 		return code
 	}
 	return result
-}
-
-func GetMessage(code string) string {
-	return GetMessageParam(code, SPANISH, "")
 }

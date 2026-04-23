@@ -65,12 +65,6 @@ func GetStrinToFloat64(numFloat float64) string {
 	return strconv.FormatFloat(numFloat, 'f', 2, 32)
 }
 
-type InvalidConvertStringToFloat struct{}
-
-func (InvalidConvertStringToFloat) Error() string {
-	return "InvalidConvertStringToFloat"
-}
-
 func GetFloatToString(numString string) (float64, error) {
 	floatValue, err := strconv.ParseFloat(numString, 32)
 	if err != nil {

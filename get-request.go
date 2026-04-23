@@ -10,7 +10,7 @@ func GetHeader(r *http.Request, header string) []string {
 
 func GetLanguageHeader(r *http.Request) string {
 	headerLanguage := GetHeader(r, "Accept-Language")
-	idioma := "es"
+	idioma := SPANISH
 	if len(headerLanguage) >= 1 {
 		idioma = headerLanguage[0]
 	}
