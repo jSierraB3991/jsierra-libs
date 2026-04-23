@@ -22,6 +22,12 @@ func (TenantNotFoundError) Error() string {
 	return "TENANT_NOT_FOUND_ERROR"
 }
 
+type InvalidTenantError struct{}
+
+func (InvalidTenantError) Error() string {
+	return "INVALID_TENANT_ERROR"
+}
+
 type InvalidConvertStringToFloat struct{}
 
 func (InvalidConvertStringToFloat) Error() string {
