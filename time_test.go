@@ -33,8 +33,9 @@ func TestValidateScheduleTask(t *testing.T) {
 			err := ScheduleTask(tc.Value, func() {
 				log.Printf("Log %v", tc.Name)
 			})
-			if err != tc.ExpectEror {
-				t.Errorf("Error %v, got %v", tc.ExpectEror, err)
+			rError := UnwrapRecursive(err)
+			if rError != tc.ExpectEror {
+				t.Errorf("Error %v, got %v", tc.ExpectEror, rError)
 			}
 		})
 	}

@@ -16,7 +16,7 @@ import (
 func ValidateIsHaveEmojis(cadenaNoEmoji, dataError string) error {
 
 	if ContainsEmoji(cadenaNoEmoji) {
-		return NewContainsEmojiError(dataError)
+		return ErrorBadRequest(NewContainsEmojiError(dataError))
 	}
 	return nil
 }

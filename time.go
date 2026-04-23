@@ -8,7 +8,7 @@ func ScheduleTask(targetTime time.Time, task func()) error {
 	duration := time.Until(targetTime)
 
 	if duration <= 0 {
-		return InvalidDurationOfTask{}
+		return ErrorBadRequest(InvalidDurationOfTask{})
 	}
 
 	time.AfterFunc(duration, task)

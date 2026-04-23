@@ -69,7 +69,7 @@ func GetFloatToString(numString string) (float64, error) {
 	floatValue, err := strconv.ParseFloat(numString, 32)
 	if err != nil {
 		fmt.Println("Error converting string to float32:", err)
-		return 0, InvalidConvertStringToFloat{}
+		return 0, ErrorBadRequest(InvalidConvertStringToFloat{})
 	}
 	return floatValue, nil
 }

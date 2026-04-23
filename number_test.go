@@ -61,8 +61,10 @@ func TestConvertStringToFloat32(t *testing.T) {
 
 		t.Run(tc.Value, func(t *testing.T) {
 			result, err := GetStringtofloat32(tc.Value)
-			if err != tc.ExpectError {
-				t.Errorf("expect %v, got %v", tc.ExpectError, err)
+
+			eRecursive := UnwrapRecursive(err)
+			if eRecursive != tc.ExpectError {
+				t.Errorf("expect %v, got %v", tc.ExpectError, eRecursive)
 			}
 			if result != tc.ExpectValue {
 				t.Errorf("expect %v, got %v", tc.ExpectValue, result)

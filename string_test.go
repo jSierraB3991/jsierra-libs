@@ -68,8 +68,9 @@ func TestConvertStrinToDate(t *testing.T) {
 
 		t.Run(tc.Name, func(t *testing.T) {
 			_, err := GetDateByString(tc.Value)
-			if err != tc.ExpectEror {
-				t.Errorf("Error %v, got %v", tc.ExpectEror, err)
+			eRecursive := UnwrapRecursive(err)
+			if eRecursive != tc.ExpectEror {
+				t.Errorf("Error %v, got %v", tc.ExpectEror, eRecursive)
 			}
 		})
 	}
