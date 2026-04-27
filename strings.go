@@ -8,9 +8,6 @@ import (
 	"strconv"
 	"strings"
 	"unicode"
-
-	"golang.org/x/text/cases"
-	"golang.org/x/text/language"
 )
 
 func ValidateIsHaveEmojis(cadenaNoEmoji, dataError string) error {
@@ -86,9 +83,17 @@ func ContainsEmoji(s string) bool {
 
 // Capitalizar nombre correctamente antes de guardarlo en la DB
 func CapitalizeName(name string) string {
-	name = strings.TrimSpace(name)         // Elimina espacios en blanco extra
-	caser := cases.Title(language.English) // Capitaliza adecuadamente
-	return caser.String(name)
+	words := strings.Fields(strings.ToLower(name))
+
+	if len(words) == 0 {
+		return ""
+	}
+
+	r := []rune(words[0])
+	r[0] = unicode.ToUpper(r[0])
+	words[0] = string(r)
+
+	return strings.Join(words, " ")
 }
 
 type ImageNameTemp struct {
