@@ -7,7 +7,7 @@ import (
 	"encoding/base64"
 )
 
-func validateKey(baseKey string) error {
+func ValidateKey(baseKey string) error {
 	_, err := base64.StdEncoding.DecodeString(baseKey)
 	return err
 }
