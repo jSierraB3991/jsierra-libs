@@ -7,6 +7,11 @@ import (
 	"encoding/base64"
 )
 
+func validateKey(baseKey string) error {
+	_, err := base64.StdEncoding.DecodeString(baseKey)
+	return err
+}
+
 // Función para encriptar un mensaje con AES-256-GCM
 func Encrypt(secret, base64Key string) (string, error) {
 	// Decodificar la clave base64
