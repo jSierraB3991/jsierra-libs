@@ -32,11 +32,11 @@ func IsNumeric(s string) bool {
 }
 
 func GetStringUNumberFor(number uint) string {
-	return GetStringNumberFor(int(number))
+	return strconv.FormatUint(uint64(number), 10)
 }
 
 func GetStringUNumber64For(number uint64) string {
-	return GetStringNumberFor(int(number))
+	return strconv.FormatUint(number, 10)
 }
 
 func GenerateRandomCode(length int, charSet string) (string, error) {

@@ -11,14 +11,23 @@ func IsFileExist(dir string) bool {
 	}
 	return false
 }
-
 func ReadFile(templateName string) string {
 	exists := IsFileExist(templateName)
 	if !exists {
 		return ""
 	}
 
-	data, _ := os.ReadFile(templateName)
+	root, err := os.OpenRoot("./templates")
+	if err != nil {
+		return ""
+	}
+	defer root.Close()
+
+	data, err := root.ReadFile(templateName)
+	if err != nil {
+		return ""
+	}
+
 	return string(data)
 }
 

@@ -22,16 +22,29 @@ func GetNumberForString(number string) int {
 	return response
 }
 
-func GetUNumberForString(number string) uint {
+func Getint64ForString(number string) int64 {
 	if RemoveSpace(number) == "" {
 		return 0
 	}
-	response, err := strconv.Atoi(number)
+	response, err := strconv.ParseInt(number, 10, 64)
 	if err != nil {
-		log.Println(number)
-		log.Println("GetNumberForString")
 		return 0
 	}
+	return response
+}
+
+func GetUNumberForString(number string) uint {
+	number = RemoveSpace(number)
+
+	if number == "" {
+		return 0
+	}
+
+	response, err := strconv.ParseUint(number, 10, 0)
+	if err != nil {
+		return 0
+	}
+
 	return uint(response)
 }
 
